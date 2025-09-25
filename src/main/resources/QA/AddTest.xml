@@ -49,7 +49,7 @@
     #set($discard = $document.setParent('QA.WebHome'))
     #set($discard = $document.save())
   #end
-  $response.sendRedirect($xwiki.getURL($targetDocReference, 'edit', "editor=inline&amp;template=QA.TestTemplate&amp;title=$escapetool.url($request.testName)&amp;parent=$escapetool.url($parentDocReference)"))
+  $response.sendRedirect($xwiki.getURL($targetDocReference, 'edit', "editor=inline&amp;template=QA.TestTemplate&amp;title=$escapetool.url($request.testName)&amp;parent=$escapetool.url($parentDocReference)&amp;form_token=$escapetool.url($services.csrf.token)"))
 #end
 
 {{html wiki="true"}}
