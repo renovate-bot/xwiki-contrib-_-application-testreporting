@@ -38,11 +38,9 @@
   <hidden>true</hidden>
   <content>{{velocity}}
 #set($distributionName = $request.distributionName)
-#set($distributionVersion = $request.distributionVersion)
 
-#if(("$!distributionName" != '' || $distributionName == '') &amp;&amp; ("$!distributionVersion" != '' || $distributionVersion == ''))
+#if(("$!distributionName" != '' || $distributionName == ''))
   #set($targetDocName = $distributionName)
-  #set($targetDocName = "${targetDocName} ${distributionVersion}")
   #set($documentReference = $services.model.createDocumentReference($xcontext.getDistribution(), 'QA', $targetDocName))
   #set($redirectReference = $services.model.createDocumentReference($xcontext.getDistribution(), 'QA', 'Management'))
   $response.sendRedirect($xwiki.getURL($documentReference, 'save', "QA.DistributionClass_0_name=$escapetool.url($distributionName)&amp;QA.DistributionClass_0_version=$escapetool.url($distributionVersion)&amp;template=QA.DistributionTemplate&amp;parent=QA.WebHome&amp;title=$escapetool.url($targetDocName)&amp;form_token=${services.csrf.getToken()}&amp;xredirect=$escapetool.url($xwiki.getURL($redirectReference))"))
@@ -53,8 +51,6 @@
 (((
             ; &lt;label for="distributionName"&gt;$services.localization.render('qaapp.AddDistribution.distributionName.label')&lt;/label&gt;
             : &lt;input type="text" id="distributionName" name="distributionName"&gt;
-            ; &lt;label for="distributionVersion"&gt;$services.localization.render('qaapp.AddDistribution.distributionVersion.label')&lt;/label&gt;
-            : &lt;input type="text" id="distributionVersion" name="distributionVersion"&gt;
 
             &lt;div class="xform buttons"&gt;
             &lt;span class="buttonwrapper"&gt;&lt;input type="submit" value="$services.localization.render('qaapp.AddDistribution.distributionName')" class="button"/&gt;&lt;/span&gt;

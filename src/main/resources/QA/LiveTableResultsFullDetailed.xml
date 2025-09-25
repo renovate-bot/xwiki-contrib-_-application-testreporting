@@ -265,13 +265,11 @@
     #set($distributionDocument = $xwiki.getDocument($item.get(11)))
     #if(!$distributionDocument.isNew())
         #set($distributionName = $distributionDocument.getObject('QA.DistributionClass').getProperty('name').getValue())
-        #set($distributionVersion = $distributionDocument.getObject('QA.DistributionClass').getProperty('version').getValue())
         #if("$!{distributionName}" != '')
-            #set($distributionIconURL = $doc.getAttachmentURL("${distributionName}.png"))
-            #set($discard = $row.put('distribution', "&lt;img src=""$!distributionIconURL""/&gt; &lt;span&gt;$!distributionName $!distributionVersion&lt;/span&gt;"))
+            #set($discard = $row.put('distribution', "&lt;span class=""distributionVersions""&gt;$!distributionName&lt;/span&gt;"))
         #end
     #else
-        #set($discard = $row.put('distribution', "$distributionDocument"))
+        #set($discard = $row.put('distribution', "$distributionDocument.getDisplayTitle()"))
     #end
     ##
     #set($discard = $row.put('user', "$xwiki.getUserName($item.get(5), true)"))

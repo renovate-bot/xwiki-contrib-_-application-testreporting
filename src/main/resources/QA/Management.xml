@@ -165,7 +165,7 @@
   (%class="buttonwrapper"%)[[$services.localization.render('qaapp.Management.AddJava.button')&gt;&gt;QA.AddJava]]
   #livetable("javaVersions" $collist $colprops $options)
 #end
-= Existing Distribution Versions =
+= Existing Distributions =
 #set($hql = ", BaseObject as obj where doc.fullName = obj.name and obj.className = 'QA.DistributionClass'")
 #set($results = $xwiki.searchDocuments($hql, 0, 0))
 #if(!$results.isEmpty())

@@ -87,7 +87,7 @@ qaapp.Management.AddBrowser.button=Add new Browser
 qaapp.Management.AddDatabase.button=Add new Database
 qaapp.Management.AddServletContainer.button=Add new Servlet Container
 qaapp.Management.AddJava.button=Add new Java Version
-qaapp.Management.AddDistribution.button=Add new Distribution Version
+qaapp.Management.AddDistribution.button=Add new Distribution
 qaapp.Management.AddApp.button=Add new App Version
 
 # Translations for the Add Test form

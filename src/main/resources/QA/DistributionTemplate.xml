@@ -65,20 +65,6 @@
         <validationRegExp/>
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
-      <version>
-        <customDisplay/>
-        <disabled>0</disabled>
-        <hint/>
-        <name>version</name>
-        <number>2</number>
-        <picker>1</picker>
-        <prettyName>version</prettyName>
-        <size>30</size>
-        <unmodifiable>0</unmodifiable>
-        <validationMessage/>
-        <validationRegExp/>
-        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
-      </version>
     </class>
     <property>
       <name/>

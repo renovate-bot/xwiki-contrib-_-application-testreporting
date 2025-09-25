@@ -123,12 +123,9 @@
       #end
       #if($distributionDoc.getObject('QA.DistributionClass'))
         #set($distributionName = $distributionDoc.get('name'))
-        #set($distributionVersions = $distributions.get($distributionName))
         #if(!$distributionVersions)
-          #set($distributionVersions = $collectionstool.getSet())
-          #set($discard = $distributions.put($distributionName, $distributionVersions))
+          #set($discard = $distributions.put($distributionName, $distributionName))
         #end
-        #set($discard = $distributionVersions.add($distributionDoc.get('version')))
       #else
         #set($discard = $distributions.put($distributionValue, ''))
       #end
@@ -181,15 +178,12 @@
       #set($javasHTML = $javasHTML + "&lt;img src=""$doc.getAttachmentURL($javaIcon)"" alt=""$java.key"" title=""$java.key""&gt;" + "&lt;span class=""javaVersions""&gt; $!{java.value.toString().replace('[', '').replace(']', '')}&lt;/span&gt; &lt;br&gt;")
     #end
     #set($discard = $row.put("javas","$javasHTML"))
-    ## We get an image for each distribution version and put the versions
     #set($distributionsHTML='')
+    ## Only one distribution version per distribution
     #foreach($distribution in $sorttool.sort($distributions.entrySet(), 'key:asc'))
-      #set($distributionIcon = $distribution.key+'.png')
-      ## Sort (String sort, not Integer sort)
-      #set($distribution.value = $sorttool.sort($distribution.value))
-      #set($distributionsHTML = $distributionsHTML + "&lt;img src=""$doc.getAttachmentURL($distributionIcon)"" alt=""$distribution.key"" title=""$distribution.key""&gt;" + "&lt;span class=""distributionVersions""&gt; $!{distribution.value.toString().replace('[', '').replace(']', '')}&lt;/span&gt; &lt;br&gt;")
+      #set($distributionsHTML = $distributionsHTML + "&lt;span class=""distributionVersions""&gt;$!{distribution.value}&lt;/span&gt; &lt;br&gt;")
     #end
-    #set($discard = $row.put("distributionsdistributions","$distributionsHTML"))
+    #set($discard = $row.put("distributions","$distributionsHTML"))
   #else
     #set($discard = $row.put("product", $services.localization.render('qaapp.WebHome.LiveTable.no.tests.execution.found')))
     #set($discard = $row.put("browsers", ''))

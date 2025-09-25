@@ -377,7 +377,7 @@
 }
 
 .distributionVersions{
-  font-size:10px;
+  white-space: pre;
 }
 
 .servletContainerVersions{
