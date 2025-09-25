@@ -106,7 +106,8 @@
     == Results ==
     #set($discard = $xwiki.ssx.use("QA.WebHome"))
     #set($discard = $xwiki.jsx.use("QA.WebHome" ,{'minify':false,'defer':false}))
-    #set($columns = ['product', 'application', 'browser', 'database', 'servletContainer', 'java', 'user', 'date', 'passed', 'jira'])
+    #set($columns = ['product', 'application', 'browser', 'database', 'servletContainer', 'java', 'distribution',
+      'user', 'date', 'passed', 'jira'])
     #set($columnsProperties = {
       'product'      :{'type': 'suggest', 'html' :true, 'filterable': true, 'sortable': true},
       'application'  :{'type': 'suggest', 'html' :true, 'filterable': true, 'sortable': true},
@@ -114,6 +115,7 @@
       'database'     :{'type': 'suggest', 'html': true, 'filterable': true, 'sortable': true},
       'servletContainer' :{'type': 'suggest', 'html': true, 'filterable': true, 'sortable': true},
       'java'  :{'type': 'suggest', 'html' :true, 'filterable': true, 'sortable': true},
+      'distribution'  :{'type': 'suggest', 'html' :true, 'filterable': true, 'sortable': true},
       'user'         :{'type': 'suggest', 'html': true, 'filterable': true, 'sortable': true},
       'date'         :{'type': 'date', 'html': true, 'filterable': true, 'sortable': true},
       'passed'       :{'type': 'boolean', 'html': true, 'filterable': true, 'sortable': true},
