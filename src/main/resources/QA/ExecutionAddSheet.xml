@@ -124,6 +124,9 @@
     ## Java Version Selector
     ; &lt;label for="QA.ExecutionClass_${object.number}_java"&gt;$doc.displayPrettyName('java', false, false)&lt;/label&gt;
     : $doc.display('java', 'edit')
+    ## Distribution Version Selector
+    ; &lt;label for="QA.ExecutionClass_${object.number}_distribution"&gt;$doc.displayPrettyName('distribution', false, false)&lt;/label&gt;
+    : $doc.display('distribution', 'edit')
     ## Passed/Fail
     ; &lt;label for="QA.ExecutionClass_${object.number}_passed"&gt;$doc.displayPrettyName('passed', false, false)&lt;/label&gt;
     ; $doc.display('passed', 'edit')

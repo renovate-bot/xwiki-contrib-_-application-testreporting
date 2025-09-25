@@ -174,6 +174,34 @@
       <valueField/>
       <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
     </java>
+    <distribution>
+      <cache>0</cache>
+      <classname/>
+      <customDisplay/>
+      <defaultValue/>
+      <disabled>0</disabled>
+      <displayType>select</displayType>
+      <freeText/>
+      <hint/>
+      <idField/>
+      <largeStorage>0</largeStorage>
+      <multiSelect>0</multiSelect>
+      <name>distribution</name>
+      <number>11</number>
+      <picker>0</picker>
+      <prettyName>Distribution Version</prettyName>
+      <relationalStorage>0</relationalStorage>
+      <separator> </separator>
+      <separators/>
+      <size>1</size>
+      <sort/>
+      <sql>select doc.fullName, doc.name from XWikiDocument doc,BaseObject as obj where obj.name=doc.fullName and obj.className='QA.DistributionClass' and doc.fullName &lt;&gt; 'QA.DistributionTemplate' order by doc.name</sql>
+      <unmodifiable>0</unmodifiable>
+      <validationMessage/>
+      <validationRegExp/>
+      <valueField/>
+      <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+    </distribution>
     <jira>
       <customDisplay/>
       <disabled>0</disabled>

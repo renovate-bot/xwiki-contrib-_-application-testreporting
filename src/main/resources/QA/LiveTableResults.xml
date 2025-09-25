@@ -45,7 +45,7 @@
   #set($statement = "select execution.product from Document as doc, doc.object(QA.ExecutionClass) as execution where execution.test = :test order by execution.date desc")
   #set($product = $services.query.xwql($statement).bindValue("test", "${row.doc_space}.${row.doc_name}").setLimit(1).execute())
   #if(!$product.isEmpty())
-    #set($statement = "select execution.browser, execution.database, execution.servletContainer, execution.java from Document as doc, doc.object(QA.ExecutionClass) as execution where execution.product = :product and execution.test = :test")
+    #set($statement = "select execution.browser, execution.database, execution.servletContainer, execution.java, execution.distribution from Document as doc, doc.object(QA.ExecutionClass) as execution where execution.product = :product and execution.test = :test")
     #set($results = $services.query.xwql($statement).bindValue("product", $product.get(0)).bindValue("test", "${row.doc_space}.${row.doc_name}").execute())
     ## RESULTS: $results.class.name
     ## PRODUCT: $product
@@ -65,15 +65,18 @@
     #set($databases = {})
     #set($servletContainers = {})
     #set($javas = {})
+    #set($distributions = {})
     #foreach($result in $results)
       #set($browserValue=$result.get(0))
       #set($databaseValue=$result.get(1))
       #set($servletContainerValue=$result.get(2))
       #set($javaValue=$result.get(3))
+      #set($distributionValue=$result.get(4))
       #set($browserDoc=$xwiki.getDocument($browserValue))
       #set($databaseDoc=$xwiki.getDocument($databaseValue))
       #set($servletContainerDoc=$xwiki.getDocument($servletContainerValue))
       #set($javaDoc=$xwiki.getDocument($javaValue))
+      #set($distributionDoc=$xwiki.getDocument($distributionValue))
       #if($browserDoc.getObject('QA.BrowserClass'))
         #set($browserName = $browserDoc.get('name'))
         #set($browserVersions = $browsers.get($browserName))
@@ -117,6 +120,14 @@
         #set($discard = $javaVersions.add($javaDoc.get('version')))
       #else
         #set($discard = $javas.put($javaValue, ''))
+      #end
+      #if($distributionDoc.getObject('QA.DistributionClass'))
+        #set($distributionName = $distributionDoc.get('name'))
+        #if(!$distributionVersions)
+          #set($discard = $distributions.put($distributionName, $distributionName))
+        #end
+      #else
+        #set($discard = $distributions.put($distributionValue, ''))
       #end
     #end
     ## We get an image for each browser and put the versions
@@ -167,12 +178,19 @@
       #set($javasHTML = $javasHTML + "&lt;img src=""$doc.getAttachmentURL($javaIcon)"" alt=""$java.key"" title=""$java.key""&gt;" + "&lt;span class=""javaVersions""&gt; $!{java.value.toString().replace('[', '').replace(']', '')}&lt;/span&gt; &lt;br&gt;")
     #end
     #set($discard = $row.put("javas","$javasHTML"))
+    #set($distributionsHTML='')
+    ## Only one distribution version per distribution
+    #foreach($distribution in $sorttool.sort($distributions.entrySet(), 'key:asc'))
+      #set($distributionsHTML = $distributionsHTML + "&lt;span class=""distributionVersions""&gt;$!{distribution.value}&lt;/span&gt; &lt;br&gt;")
+    #end
+    #set($discard = $row.put("distributions","$distributionsHTML"))
   #else
     #set($discard = $row.put("product", $services.localization.render('qaapp.WebHome.LiveTable.no.tests.execution.found')))
     #set($discard = $row.put("browsers", ''))
     #set($discard = $row.put("databases", ''))
     #set($discard = $row.put("servletContainers", ''))
     #set($discard = $row.put("javas", ''))
+    #set($discard = $row.put("distributions", ''))
   #end
   #set($test = "${row.doc_space}.${row.doc_name}")
   #set($discard = $row.put("doc_runTest_url", $xwiki.getURL($row.doc_fullName, 'get', "sheet=QA.ExecutionAddSheet")))

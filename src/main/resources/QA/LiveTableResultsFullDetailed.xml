@@ -27,7 +27,7 @@
   <defaultLanguage/>
   <translation>0</translation>
   <creator>xwiki:XWiki.Admin</creator>
-  <parent>qa:QA.WebHome</parent>
+  <parent>QA.WebHome</parent>
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <version>1.1</version>
@@ -64,7 +64,7 @@
   ## $offset
   #set($discard = $map.put('reqNo', $mathtool.toInteger($request.reqNo)))
   ## #set($discard = $map.put('tags', []))
-  #set($dataQuery = "select execution.test, execution.product, execution.application, execution.browser, execution.database, execution.user, execution.date, execution.passed, execution.jira, execution.servletContainer, execution.java from Document as doc, doc.object(QA.ExecutionClass) as execution where doc.fullName &lt;&gt; 'QA.ExecutionTemplate'")
+  #set($dataQuery = "select execution.test, execution.product, execution.application, execution.browser, execution.database, execution.user, execution.date, execution.passed, execution.jira, execution.servletContainer, execution.java, execution.distribution from Document as doc, doc.object(QA.ExecutionClass) as execution where doc.fullName &lt;&gt; 'QA.ExecutionTemplate'")
   ##
   #set($countQuery = "select count(execution) from Document as doc, doc.object(QA.ExecutionClass) as execution where doc.fullName &lt;&gt; 'QA.ExecutionTemplate'")
   ##
@@ -96,6 +96,10 @@
   #if ("$!request.java" != '')
     #set ($dataQuery = "${dataQuery} AND lower(execution.java) LIKE :likeJava ")
     #set ($countQuery = "${countQuery} and lower(execution.java) LIKE :likeJava ")
+  #end
+  #if ("$!request.distribution" != '')
+    #set ($dataQuery = "${dataQuery} AND lower(execution.distribution) LIKE :likeDistribution ")
+    #set ($countQuery = "${countQuery} and lower(execution.distribution) LIKE :likeDistribution ")
   #end
   #if ("$!request.user" != '')
     #set ($dataQuery = "${dataQuery} AND lower(execution.user) LIKE '%$stringtool.lowerCase(${request.user})%' ")
@@ -159,6 +163,12 @@
     #set ($java = $java.replaceAll('\\', '\\\\'))
     #set ($discard = $dataQuery.bindValue('likeJava', "%${java}%"))
     #set ($discard = $countQuery.bindValue('likeJava', "%${java}%"))
+  #end
+  #if ("$!request.distribution" != '')
+    #set ($distribution = $stringtool.lowerCase($request.distribution))
+    #set ($distribution = $distribution.replaceAll('\\', '\\\\'))
+    #set ($discard = $dataQuery.bindValue('likeDistribution', "%${distribution}%"))
+    #set ($discard = $countQuery.bindValue('likeDistribution', "%${distribution}%"))
   #end
   #if ("$!request.database" != '')
     #set ($database = $stringtool.lowerCase($request.database))
@@ -250,6 +260,16 @@
         #end
     #else
         #set($discard = $row.put('java', "$javaDocument"))
+    #end
+    ##
+    #set($distributionDocument = $xwiki.getDocument($item.get(11)))
+    #if(!$distributionDocument.isNew())
+        #set($distributionName = $distributionDocument.getObject('QA.DistributionClass').getProperty('name').getValue())
+        #if("$!{distributionName}" != '')
+            #set($discard = $row.put('distribution', "&lt;span class=""distributionVersions""&gt;$!distributionName&lt;/span&gt;"))
+        #end
+    #else
+        #set($discard = $row.put('distribution', "$distributionDocument.getDisplayTitle()"))
     #end
     ##
     #set($discard = $row.put('user', "$xwiki.getUserName($item.get(5), true)"))

@@ -46,6 +46,7 @@ qaapp.WebHome.LiveTable.browsers=Browsers
 qaapp.WebHome.LiveTable.databases=Databases
 qaapp.WebHome.LiveTable.servletContainers=Containers
 qaapp.WebHome.LiveTable.javas=Java
+qaapp.WebHome.LiveTable.distributions=Distribution
 qaapp.WebHome.LiveTable.automated=Automated
 qaapp.WebHome.LiveTable._actions=Action
 qaapp.WebHome.LiveTable.no.tests.execution.found=No test executions found
@@ -65,6 +66,7 @@ qaapp.Custom.LiveTable.browsers=Browsers
 qaapp.Custom.LiveTable.database=Databases
 qaapp.Custom.LiveTable.servletContainer=Containers
 qaapp.Custom.LiveTable.java=Java
+qaapp.Custom.LiveTable.distribution=Distribution
 qaapp.Custom.LiveTable.user=Tested By
 qaapp.Custom.LiveTable.date=Tested On
 qaapp.Custom.LiveTable.passed=Result
@@ -85,6 +87,7 @@ qaapp.Management.AddBrowser.button=Add new Browser
 qaapp.Management.AddDatabase.button=Add new Database
 qaapp.Management.AddServletContainer.button=Add new Servlet Container
 qaapp.Management.AddJava.button=Add new Java Version
+qaapp.Management.AddDistribution.button=Add new Distribution
 qaapp.Management.AddApp.button=Add new App Version
 
 # Translations for the Add Test form
@@ -118,6 +121,13 @@ qaapp.AddJava.javaVersion=Add a new java version
 qaapp.AddJava.javaVersion.label=Java Version
 qaapp.AddJava.javaName=Add a new JDK vendor
 qaapp.AddJava.javaName.label=JDK Vendor Name
+
+# Translation in the Add Distribution container
+qaapp.AddDistribution.distribution.label=Distribution Version
+qaapp.AddDistribution.distributionVersion=Add a new distribution version
+qaapp.AddDistribution.distributionVersion.label=Distribution Version
+qaapp.AddDistribution.distributionName=Add a new distribution
+qaapp.AddDistribution.distributionName.label=Distribution Name
 
 # Translations in the Add App form
 qaapp.AddApp.button=Add a new app
